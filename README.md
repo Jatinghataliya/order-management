@@ -8,9 +8,9 @@ Following are the microservices.
   ## Order Service
   Order service used to create the order, retrieve all order & particular order
   ```
-    * http://localhost:8383/order-service/orders 
-    * http://localhost:8383/order-service/orders/{orderid}
-    * http://localhost:8383/order-service/orders
+    1. http://localhost:8383/order-service/orders (POST Method)
+    2. http://localhost:8383/order-service/orders/{orderid} (GET Method)
+    3. http://localhost:8383/order-service/orders (GET Method)
    ```
   ## Order Item Service
   Order item service contains the all ordered item information with respect to particular order

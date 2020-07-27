@@ -22,5 +22,5 @@ Following are the microservices.
     3. http://localhost:8282/order-item-service/order-items/orders/{orderid} (GET Method)
     4. http://localhost:8282/order-item-service/order-items (GET Method)
     5. http://localhost:8282/swagger-ui.html (Swagger UI)
-    5. http://localhost:8282/actuator (Actuator Endpoints)
+    6. http://localhost:8282/actuator (Actuator Endpoints)
    ```

@@ -20,15 +20,6 @@ public class OrderItemService {
 	@Autowired
 	private OrderItemRepository itemRepository;
 
-	public OrderItem createOrderItem(OrderItem orderItem) throws OrderItemNotCreated{
-		
-		OrderItem item = itemRepository.save(orderItem);
-		if(item == null || item.getProductId() == 0) {
-			throw new OrderItemNotCreated("Order " + orderItem.getProductName() +" not created", orderItem);
-		}
-		return item;
-	}
-	
 	public List<OrderItem> createOrderItems(List<OrderItem> orderItems) throws OrderItemNotCreated {
 		List<OrderItem> items = itemRepository.saveAll(orderItems);
 		if(items == null || items.size() <= 0) {
@@ -63,6 +54,5 @@ public class OrderItemService {
 		}
 		
 		return orderItems;
-	}
-	
+	}	
 }

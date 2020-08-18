@@ -1,4 +1,4 @@
-package com.order.item.service.cotroller;
+package com.order.item.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +26,7 @@ import com.order.item.service.services.OrderItemService;
 
 @WebMvcTest(OrderItemController.class)
 @ActiveProfiles("OrderItemTest")
-public class OrderItemTestController {
+public class OrderItemServiceApplicationsTests {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -41,9 +41,9 @@ public class OrderItemTestController {
 	@Order(1)
 	public void addOrderItems() throws Exception {
 		List<OrderItem> items = new ArrayList<>();
-		items.add(OrderItem.builder().orderId(1).productId(1).productCode("ABC_123").productName("ABC").quantity(10).build());
-		items.add(OrderItem.builder().orderId(1).productId(2).productCode("BCD_123").productName("BCD").quantity(12).build());
-		items.add(OrderItem.builder().orderId(1).productId(3).productCode("EFG_123").productName("EFG").quantity(13).build());
+		items.add(OrderItem.builder().productId(1).productCode("ABC_123").productName("ABC").quantity(10).build());
+		items.add(OrderItem.builder().productId(2).productCode("BCD_123").productName("BCD").quantity(12).build());
+		items.add(OrderItem.builder().productId(3).productCode("EFG_123").productName("EFG").quantity(13).build());
 		Mockito.when(orderItemService.createOrderItems(Mockito.anyList())).thenReturn(items);
 		
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
@@ -60,9 +60,9 @@ public class OrderItemTestController {
 	@Order(2)
 	public void getAllOrderItems() throws Exception {
 		List<OrderItem> items = new ArrayList<>();
-		items.add(OrderItem.builder().orderId(1).productId(1).productCode("ABC_123").productName("ABC").quantity(10).build());
-		items.add(OrderItem.builder().orderId(1).productId(2).productCode("BCD_123").productName("BCD").quantity(12).build());
-		items.add(OrderItem.builder().orderId(1).productId(3).productCode("EFG_123").productName("EFG").quantity(13).build());
+		items.add(OrderItem.builder().productId(1).productCode("ABC_123").productName("ABC").quantity(10).build());
+		items.add(OrderItem.builder().productId(2).productCode("BCD_123").productName("BCD").quantity(12).build());
+		items.add(OrderItem.builder().productId(3).productCode("EFG_123").productName("EFG").quantity(13).build());
 		Response<List<OrderItem>> response = Response.<List<OrderItem>>builder().code(200).message("Ok").data(items).build();
 		Mockito.when(orderItemService.getOrderItems()).thenReturn(items);
 		mockMvc.perform(MockMvcRequestBuilders.get("/order-item-service/order-items").contentType(MediaType.APPLICATION_JSON))

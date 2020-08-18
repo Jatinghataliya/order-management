@@ -31,7 +31,7 @@ public class OrderController {
 	@PostMapping("/orders")
 	public Response<Order> createOrdere(@Valid @RequestBody Order order) {
 		
-		logger.info("Create Ordere : " + order.getJson());
+		logger.info("Create Order : " + order.getJson());
 		List<OrderItem> orderItems = order.getOrderItems();
 		if(orderItems == null || orderItems.size() <= 0) {
 			return Response.<Order>builder().code(400).message("Order item not found in this order").data(order).build();

@@ -35,11 +35,24 @@ public class OrderService {
 			throw new OrderNotCreated(500, "Order not created", order);
 		}
 		
-		List<OrderItem> orderItems = order.getOrderItems().parallelStream().map(oi -> OrderItem.builder().orderId(order2.getOrderId()).productCode(oi.getProductCode()).productName(oi.getProductName()).quantity(oi.getQuantity()).build()).collect(Collectors.toList());
+		List<OrderItem> orderItems = order
+										.getOrderItems()
+										.parallelStream()
+										.map(oi -> 
+													OrderItem
+													.builder()
+														.orderId(order2.getOrderId())
+														.productCode(oi.getProductCode())
+														.productName(oi.getProductName())
+														.quantity(oi.getQuantity())
+													.build())
+										.collect(Collectors.toList());
 		Response<List<OrderItem>> response = orderItemRepository.createOrderIte(orderItems);
 		
 		if(response != null && response.getData() != null) {
 			order2.setOrderItems(response.getData());
+		} else {
+			order2.setOrderItems(Collections.emptyList());
 		}
 		
 		return order2;
@@ -54,14 +67,15 @@ public class OrderService {
 		
 		return orders
 					.parallelStream()
-					.map(or -> Order.builder()
-							.customerName(or.getCustomerName())
-							.orderDate(or.getOrderDate())
-							.orderId(or.getOrderId())
-							.shippingAddress(or.getShippingAddress())
-							.total(or.getTotal())
-							.orderItems(getOrderItems(or.getOrderId()))
-							.build())
+					.map(or -> Order
+								.builder()
+									.customerName(or.getCustomerName())
+									.orderDate(or.getOrderDate())
+									.orderId(or.getOrderId())
+									.shippingAddress(or.getShippingAddress())
+									.total(or.getTotal())
+									.orderItems(getOrderItems(or.getOrderId()))
+								.build())
 					.sorted(Comparator.comparing(Order::getOrderDate))
 					.collect(Collectors.toList());
 	}
